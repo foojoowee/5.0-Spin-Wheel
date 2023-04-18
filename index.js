@@ -19,7 +19,7 @@ const rotationValues = [
 const data = [16, 16, 16, 16, 16, 16];
 
 //Background colour of pieces
-const pieColors = [
+let pieColors = [
     "#1565c0",
     "#ADD8E6",
     "#1565c0",
@@ -65,6 +65,55 @@ const chartConfig = {
 
 let myChart = new Chart(wheel, chartConfig)
 
+function redTheme(){
+  myChart.data.datasets[0].backgroundColor = [
+    "#D7100D",
+    "#D65A58",
+    "#D7100D",
+    "#D65A58",
+    "#D7100D",
+    "#D65A58",
+  ];
+  const yellowSpin = document.getElementById('spin-button');
+  yellowSpin.style.background = 'radial-gradient(rgb(255, 251, 0) 20%, rgb(133, 133, 187))';
+  yellowSpin.style.color = 'black';
+  myChart.options.plugins.datalabels.color = '#ffffff';
+  myChart.update();
+}
+
+function blueTheme(){
+  myChart.data.datasets[0].backgroundColor = [
+    "#1565c0",
+    "#ADD8E6",
+    "#1565c0",
+    "#ADD8E6",
+    "#1565c0",
+    "#ADD8E6",
+  ];
+  const yellowSpin = document.getElementById('spin-button');
+  yellowSpin.style.background = 'radial-gradient(rgb(255, 251, 0) 20%, rgb(133, 133, 187))';
+  yellowSpin.style.color = 'black';
+  myChart.options.plugins.datalabels.color = '#ffffff';
+  myChart.update();
+}
+
+function yellowTheme(){
+  myChart.data.datasets[0].backgroundColor = [
+    "#D8E511",
+    "#E6EE6A",
+    "#D8E511",
+    "#E6EE6A",
+    "#D8E511",
+    "#E6EE6A",
+  ];
+  const yellowSpin = document.getElementById('spin-button');
+  yellowSpin.style.background = 'radial-gradient(rgb(172, 103, 166) 20%, rgb(133, 133, 187))';
+  yellowSpin.style.color = '#fff';
+  myChart.options.plugins.datalabels.color = 'black';
+  myChart.update();
+
+}
+
 
 //Display value based on random angle
 
@@ -73,6 +122,8 @@ const valueGenerator = (angleValue) =>{
       if(angleValue >= i.minDegree && angleValue <= i.maxDegree){
         finalValue.innerHTML = `<p>Value: ${i.value}</p>`;
         spinButton.disabled = false;
+        const addText = document.getElementById("spin-results");
+        addText.innerHTML += `<p>${i.value}</p>`
         break;
       }
     }
@@ -111,4 +162,7 @@ spinButton.addEventListener("click", () =>{
       resultValue = 101;
     }
   }, 10);
+
+
+
 });

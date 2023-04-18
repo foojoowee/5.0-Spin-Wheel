@@ -4,35 +4,54 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 
+
 }
 
 body{
+
+    background: linear-gradient(300deg, rgb(185, 185, 192), rgb(37, 74, 131));
+
+}
+
+.main-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100vh;
-    background: linear-gradient(300deg, rgb(185, 185, 192), rgb(37, 74, 131))
+    width: 100vw;
+}
+
+.wheel-description{
+    width: 400px;
+    max-height: 1000px;
+    box-shadow: 0px 0px 10px 5px black;
+    padding: 20px;
+    margin: 20px;
 }
 
 .wrapper{
-    width: 90%;
-    max-width: 34.37em;
-    max-height: 90vh;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
+    width: 700px;
+    position: relative;
+    /* margin: 0 auto; */
     box-shadow: 0px 0px 10px 5px black;
     padding: 20px;
+    background-color: aqua;
 }
 
-.container{
+.sub-wrapper{
+    display:flex;
+}
+
+.container1{
     position: relative;
     width: 100%;
     height: 100%;
 }
 
 #wheel{
-    max-height: inherit;
-    width: inherit;
+    display: block;
+    height: 300px;
+    width: 300px;
     top: 0;
     padding: 20px;
 }
@@ -48,12 +67,20 @@ body{
     cursor: pointer;
     border: none;
 
-    font-size: 1.5em;
+    font-size: 1.2em;
     letter-spacing: 0.1em;
     font-weight: 500;
     text-transform: uppercase;
     background: radial-gradient(rgb(255, 251, 0) 20%, rgb(133, 133, 187));
     /* opacity: 0;  */
+}
+
+#spin-button:hover{
+    opacity: 0.9;
+}
+
+#spin-button:active{
+    color: blue;
 }
 
 #wheel-arrow{
@@ -72,6 +99,49 @@ body{
     color: #1565c0;
 }
 
+.wheel-settings{
+    padding: 30px;
+    border: 3px solid black;
+    background:rgb(255, 252, 61);
+}
+
+.wheel-settings h2{
+    text-decoration: underline
+}
+
+.wheel-colour{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 20px;
+    padding-top: 20px
+}
+
+.wheel-colour button{
+    width: 60px;
+    border-radius: 10px;
+    background: rgb(38, 51, 124);
+    color: white;
+}
+
+.wheel-colour button:hover{
+    width: 60px;
+    border-radius: 10px;
+    background: rgb(119, 126, 180);
+    color: rgb(5, 35, 49);
+}
+
+.wheel-settings p{
+    text-align: center;
+    font-weight: 600;
+}
+
+.background-theme button{
+    width: 80px;
+    border-radius: 10px;
+    background: rgb(94, 124, 38);
+    color: white;
+}
+
 @keyframes rotate{
     100%{
         transform: rotate(360deg)
@@ -81,6 +151,15 @@ body{
 @media screen and (max-width: 768px){
     .wrapper{
         font-size: 10px;
+    }
+
+
+    #wheel{
+        display: block;
+        height: 200px;
+        width: 200px;
+        top: 0;
+        padding: 10px;
     }
 
 
