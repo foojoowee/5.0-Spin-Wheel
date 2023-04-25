@@ -3,14 +3,22 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-
-
+    
 }
 
 body{
-
     background: linear-gradient(300deg, rgb(185, 185, 192), rgb(37, 74, 131));
+}
 
+
+h2{
+    text-align: center;
+    text-decoration: underline;
+
+}
+
+button:hover{
+    cursor: pointer;
 }
 
 .main-wrapper{
@@ -21,25 +29,78 @@ body{
     width: 100vw;
 }
 
-.wheel-description{
-    width: 400px;
-    max-height: 1000px;
-    box-shadow: 0px 0px 10px 5px black;
-    padding: 20px;
-    margin: 20px;
-}
-
 .wrapper{
-    width: 700px;
+    width: 850px;
+    height: 535px;
     position: relative;
     /* margin: 0 auto; */
     box-shadow: 0px 0px 10px 5px black;
     padding: 20px;
-    background-color: aqua;
+    /* background-color: aqua; */
+    background: url("Assets/Background/theme-1.jpg");
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+#wheel-description1{
+    width: 800px;
+    word-wrap: break-word;
+    max-height: 1000px;
+    box-shadow: 0px 0px 10px 5px black;
+    padding: 20px;
+    margin: 20px;
+    background: rgb(172, 134, 134);
+}
+
+#wheel-description2{
+    width: 800px;
+    word-wrap: break-word;
+    max-height: 1000px;
+    box-shadow: 0px 0px 10px 5px black;
+    padding: 20px;
+    margin: 20px;
+    background: rgb(172, 134, 134);
+    display: none;
+}
+
+#wheel-description3{
+    width: 800px;
+    word-wrap: break-word;
+    max-height: 1000px;
+    box-shadow: 0px 0px 10px 5px black;
+    padding: 20px;
+    margin: 20px;
+    background: rgb(172, 134, 134);
+    display: none;
+}
+
+
+.wheel-description1 h2{
+    overflow-wrap: break-word;
+}
+
+.page-button-2, .page-button-3{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: rgb(43, 40, 40);
+}
+
+.page-button-1{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: rgb(172, 134, 134);
+}
+
+#circles button:hover{
+    background:rgb(173, 149, 149);
 }
 
 .sub-wrapper{
     display:flex;
+    width: 800px;
+    margin-right: 20px;
 }
 
 .container1{
@@ -50,8 +111,8 @@ body{
 
 #wheel{
     display: block;
-    height: 300px;
-    width: 300px;
+    height: 425px !important;
+    width: 425px !important;
     top: 0;
     padding: 20px;
 }
@@ -79,10 +140,6 @@ body{
     opacity: 0.9;
 }
 
-#spin-button:active{
-    color: blue;
-}
-
 #wheel-arrow{
     /* opacity: 0; */
     position: absolute;
@@ -92,21 +149,32 @@ body{
 }
 
 #final-value{
-    font-size: 1.2em;
+    position: relative;
+    font-size: 1.0em;
     font-weight: 500;
-    text-align: center;
+    left: 22%;
     margin-top: 1.5em;
     color: #1565c0;
+    border: 3px solid black;
+    background: white;
+    width: fit-content;
+    padding: 0 20px;
+    margin: 10px auto;
 }
+
 
 .wheel-settings{
     padding: 30px;
     border: 3px solid black;
-    background:rgb(255, 252, 61);
+    background:rgb(231, 231, 213);
+    /* display: none; */
+
+    /* transition: 2s ease-in; */
 }
 
 .wheel-settings h2{
     text-decoration: underline
+
 }
 
 .wheel-colour{
@@ -119,28 +187,338 @@ body{
 .wheel-colour button{
     width: 60px;
     border-radius: 10px;
-    background: rgb(38, 51, 124);
-    color: white;
 }
 
 .wheel-colour button:hover{
-    width: 60px;
-    border-radius: 10px;
-    background: rgb(119, 126, 180);
-    color: rgb(5, 35, 49);
+    opacity: 0.7;
 }
 
+#red-button{
+    color: white;
+    background: red
+}
+
+#yellow-button{
+    color: black;
+    background: yellow;
+}
+
+#blue-button{
+    color: white;
+    background: blue;
+}
+
+
 .wheel-settings p{
-    text-align: center;
+    display: flex;
+    justify-content: space-around;
     font-weight: 600;
+}
+
+.background-theme{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 10px;
+    padding-top: 10px
 }
 
 .background-theme button{
     width: 80px;
     border-radius: 10px;
-    background: rgb(94, 124, 38);
     color: white;
 }
+
+.background-theme button:hover{
+    opacity: 0.7;
+}
+
+#theme-1{
+    background: url("Assets/Background/theme-1.jpg");
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+#theme-2{
+    background: url("Assets/Background/theme-2.jpg");
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+#theme-3{
+    background: url("Assets/Background/theme-3.jpg");
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+.settings-icon{
+    height: 1em;
+    vertical-align: -2px;
+    fill: white;
+}
+
+#settings-btn{
+    position: absolute;
+    right: 10%;
+    z-index: 1;
+    border-radius: 10px;
+    padding: 0 5px;
+    color: black;
+    background: rgb(159, 216, 255);
+
+}
+
+#settings-btn:hover{
+    color: white;
+    background: rgb(93, 93, 143);
+}
+
+
+#hide-settings{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 10px;
+    border-radius: 10px;
+    color: black;
+    background: rgb(159, 216, 255);
+}
+
+#hide-settings img{
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
+#hide-settings:hover{
+    color: white;
+    background: rgb(93, 93, 143);
+}
+
+#music-icons{
+    position: relative;
+    float: left;
+}
+
+#music-icons img{
+    height: 1.5em;
+    background: white;
+    padding: 2px;
+    border: 1px solid rgb(8, 8, 8);
+    cursor: pointer;
+}
+
+#mute-icon{
+    display: none;
+}
+
+#popup-box{
+    position: relative;
+    float: right;
+    font-size: 0.8em;
+    vertical-align: 7px;
+    color: white;
+    right: 15%;
+    padding: 0px 10px;
+    border: 1px solid black;
+    background-color: rgba(70, 61, 61, 0.5);
+
+}
+
+#popup-box label{
+    vertical-align: 2px;
+}
+
+
+#popup-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    height: 60px;
+    background: rgb(209, 134, 134);
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 10px;
+    padding: 0px 80px;
+    animation: popUp 2.0s;
+    display: none;
+    z-index: 10;
+}
+
+#popup-container button{
+    padding: 5px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    background: rgb(182, 52, 52);
+    color: white;
+    border: 0;
+    font-size: 0.8em;
+    vertical-align: -10px;   
+}
+
+#popup-title {
+    /* position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    vertical-align: -10px; */
+    margin-top: -35px;
+    color: rgb(253, 249, 249);
+}
+
+/* #popup-result p{
+
+} */
+
+#popup-container img{
+    height: 3em;
+}
+
+#popup-title{
+    display: flex;
+}
+
+#circles{
+    position: absolute;
+    top: 82%;
+    left: 20%;
+}
+
+#wheel-speed{
+    margin-top: 15px;
+    text-align: center;
+}
+
+#upload-theme{
+    position: relative;
+    left: 15%;
+    max-width: 500px;
+}
+
+#input-theme {
+    max-width: 200px;
+    display: none;
+}
+
+#input-theme input{
+    max-width: 200px;
+}
+
+#upload-theme p{
+    position: relative;
+    font-weight: 400;
+    font-size: 0.8em;
+    left: 15%;
+    background: rgb(159, 216, 255);
+    width: fit-content;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 1px 1px black;
+    padding: 0px 8px;
+    margin-top: 3px;
+    cursor:pointer;
+}
+
+#upload-theme p:hover{
+    color: white;
+    background: rgb(93, 93, 143);
+}
+
+
+#music-settings{
+
+    color: black;
+}
+
+#music-settings div p{
+    font-weight: 500;
+    font-size: 0.8em
+}
+
+#music-volume{
+    display: none;
+}
+
+#music-settings-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#music-settings-wrapper div{
+    padding: 0px 10px;
+    flex-basis: auto;
+}
+
+#upload-music label{
+    position: relative;
+    font-weight: 400;
+    font-size: 1.0em;
+    background: rgb(159, 216, 255);
+    width: fit-content;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 1px 1px black;
+    padding: 0px 8px;
+    margin-top: 3px;
+    cursor:pointer;
+}
+
+#upload-music input{
+    display: none;
+}
+
+#wheel-field{
+    position: relative;
+}
+
+#wheel-segments-table{
+    background: white;
+    border: 2px solid rgb(121, 101, 101);
+    border-radius: 10px;
+    max-height: 70%;
+    padding: 10px;
+    /* overflow-y: scroll; */
+    overflow: auto;
+    overflow-wrap: break-word;
+    /* white-space: pre-wrap; */
+}
+
+#segment-count{
+    text-align: center;
+    background: rgb(202, 185, 185);
+    padding: 5px;
+    font-weight: 500;
+    border-radius: 10px;
+
+}
+
+
+
+
+
+
+
+  
+
+
+
+/* .fadeIn{
+    animation: 0.5s fadeIn forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeIn{
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+} */
 
 @keyframes rotate{
     100%{
@@ -152,8 +530,6 @@ body{
     .wrapper{
         font-size: 10px;
     }
-
-
     #wheel{
         display: block;
         height: 200px;
@@ -161,6 +537,43 @@ body{
         top: 0;
         padding: 10px;
     }
+}
 
+.pop-up{
+    opacity: 1;
+    transition: all 0.5s ease in;
+}
 
+@keyframes popUp{
+    from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+
+      }
+}
+
+@keyframes slide-in{
+    from{
+        transform: translateX(-20%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out{
+    from{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+
+    to{
+        transform: translateX(-20%);
+        opacity: 0;
+
+    }
 }
