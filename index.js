@@ -3,6 +3,7 @@ const spinButton = document.getElementById("spin-button");
 const finalValue = document.getElementById("final-value");
 const wheelArrow = document.getElementById("wheel-arrow");
 const myAudio = new Audio('/Assets/Background/wheel-spin.mp3');
+const myAudioEnding = new Audio('/Assets/Background/wheel-spin-ending.mp3');
 const winAudio = new Audio('/Assets/Background/win.mp3');
 const muteIcon = document.getElementById("mute-icon");
 const page1 = document.getElementById("wheel-description1");
@@ -10,32 +11,91 @@ const page2 = document.getElementById("wheel-description2");
 const page3 = document.getElementById("wheel-description3");
 const pageButton1 = document.getElementsByClassName("page-button-1");
 const pageButton2 = document.getElementsByClassName("page-button-2");
-const pageButton3 = document.getElementsByClassName("page-button-3");
 const volumeSlider = document.getElementById("volume-slider");
+const popup = document.getElementById("popup-result");
+const spinResult = document.getElementById("spin-results")
 
-
-const rotationValues = [
-    { minDegree: 0, maxDegree: 30, value: 2},
-    { minDegree: 31, maxDegree: 90, value: 1},
-    { minDegree: 91, maxDegree: 150, value: 6},
-    { minDegree: 151, maxDegree: 210, value: 5},
-    { minDegree: 211, maxDegree: 270, value: 4},
-    { minDegree: 271, maxDegree: 330, value: 3},
-    { minDegree: 331, maxDegree: 360, value: 2},
+let rotationValues = [
 ];
 
 //Data of the segments
-const wheelSegment = document.getElementById("wheel-segments-table");
+let wheelSegment = document.getElementById("wheel-segments-table");
 const segmentCount = document.getElementById("segment-count")
-const pElements = wheelSegment.querySelectorAll("p");
-const numOfElments = pElements.length;
-wheelSegment.oninput = function(){
-  const pElements = wheelSegment.querySelectorAll("p");
-  const numOfElments = pElements.length;
-  segmentCount.innerHTML = `<p>Wheel Segments: ${numOfElments}</p>`
-}
+let pElements = wheelSegment.querySelectorAll("p");
+let numOfElements = pElements.length;
+
+// let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+// let isFadingOut = false;
+
+// function startFadeOut(){
+//   if (!isFadingOut){
+//     audioSource = audioContext.createMediaElementSource(audioElement);
+//     audioSource.connect(audioContext.destination);
+//     audioElement.play();
+//     fadeOut();
+//     isFadingOut = true;
+//   }
+// }
+
+// function fadeOut() {
+//   var fadeDuration = 2; // Fade duration in seconds
+//   var currentTime = audioContext.currentTime;
+//   var gainNode = audioContext.createGain();
+//   audioSource.connect(gainNode);
+//   gainNode.connect(audioContext.destination);
+
+//   gainNode.gain.setValueAtTime(1, currentTime);
+//   gainNode.gain.linearRampToValueAtTime(0, currentTime + fadeDuration);
+//   setTimeout(function() {
+//     audioElement.pause();
+//     audioElement.currentTime = 0;
+//     isFadingOut = false;
+//   }, fadeDuration * 1000);
+// }
+
+function wheelChange(){
+  pElements = wheelSegment.querySelectorAll("p");
+  numOfElements = pElements.length;
+  segmentCount.innerHTML = `<p>Wheel Segments: ${numOfElements}</p>`;
+  if (numOfElements == 0){
+    wheelSegment.innerHTML = `<p>&nbsp</p>`;
+  };
+  // console.log('The number of p tags are ' + pElements.length);
+  // console.log(pElements[0].textContent);
+  // console.log(pElements[1].textContent);
+
+
+  if (data.length < numOfElements){
+    for(let i = data.length+1; i <= numOfElements; i++){
+        data.push(16);
+        // chartData.labels[i-1] = pElements[i-1].textContent;
+    };
+  };
+
+  if (data.length > numOfElements){
+    for(let i = data.length; i > numOfElements; i--){
+      data.pop();
+      chartData.labels.splice(i-1,1);
+    }
+  };
+
+  for(let i = 0; i < numOfElements; i++){
+    chartData.labels[i] = pElements[i].textContent;
+  }
+  // pElements.forEach((p) =>{
+  //   console.log(p);
+  //   console.log(chartData.labels);
+  //   let i = 0
+  //   chartData.labels[i] = (p.textContent);
+  //   i += 1
+  //   console.log(chartData.labels);
+  // })
+  myChart.update();
+};
+
 //Size of pieces
-const data = [25, 25, 25, 25, 25, 25];
+const data = [16, 16, 16, 16, 16, 16];
+// const dataLabels = ["Annie","Blitzcrank","Camille","Draven","Elise","Fiora"];
 
 //Background colour of pieces
 let pieColors = [
@@ -45,19 +105,19 @@ let pieColors = [
     "#ADD8E6",
     "#1565c0",
     "#ADD8E6",
-]
+];
 
 //using a pie chart for wheel
 
 const chartData = {
-  labels: ['hello', 2, 3, 4, 5, 6],
+  labels: ["Annie","Blitzcrank","Camille","Draven","Elise","Fiora"],
   datasets: [
     {
       backgroundColor: pieColors,
       data: data
     }
   ]
-}
+};
 
 const chartConfig = {
     plugins: [ChartDataLabels],
@@ -68,6 +128,7 @@ const chartConfig = {
       // maintainAspectRatio: false,
       responsive: true,
       animation: { duration: 0 },
+      rotation: 0,
       plugins:{
         tooltip: false,
         legend: {
@@ -81,9 +142,25 @@ const chartConfig = {
         },
       },
     },
-}
+};
 
 let myChart = new Chart(wheel, chartConfig)
+
+function removeItem(){
+  const string = popup.innerHTML;
+  const find = string.indexOf(":");
+  const newString = string.substring(find+1).trim();
+  const findString = newString.substring(0, newString.length-5)
+  console.log(findString);
+  for(let pElement of pElements){
+    if (findString === pElement.textContent){
+      console.log('found item');
+      pElement.remove();
+      wheelChange();
+      break;
+    }
+  }
+}
 
 function redTheme(){
   myChart.data.datasets[0].backgroundColor = [
@@ -130,6 +207,23 @@ function yellowTheme(){
   spinTheme.style.background = 'radial-gradient(rgb(172, 103, 166) 20%, rgb(133, 133, 187))';
   spinTheme.style.color = '#fff';
   myChart.options.plugins.datalabels.color = 'black';
+  myChart.update();
+}
+
+function colourPicker(){
+  const selectPage = document.getElementById("wheel-description1");
+  const selectColor = document.getElementById("colour-picker");
+  console.log(selectColor.value);
+  selectPage.style.background = `${selectColor.value}`;
+}
+
+function colourPicker2(){
+  const selectColor = document.getElementById("color-picker");
+  const selectColor2 = document.getElementById("color-picker2")
+  myChart.data.datasets[0].backgroundColor = [
+    `${selectColor.value}`,
+    `${selectColor2.value}`,
+  ];
   myChart.update();
 }
 
@@ -226,6 +320,7 @@ function mute(){
   // muteVolume.style.zIndex = '-10';
   unmuteVolume.style.display = 'none';
   myAudio.muted = true;
+  myAudioEnding.muted = true;
   winAudio.muted = true;
   try{
   const customMusic = document.getElementById("custom-audio")
@@ -245,6 +340,7 @@ function unmute(){
   // muteVolume.style.zIndex = '-10';
   unmuteVolume.style.display = 'block';
   myAudio.muted = false;
+  myAudioEnding.muted = false;
   winAudio.muted = false;
   try{
     const customMusic = document.getElementById("custom-audio");
@@ -271,35 +367,29 @@ function popupOpen(){
       const mainWrapper = document.getElementsByClassName("main-wrapper");
       mainWrapper[0].style.opacity = "0.3";
       winAudio.play();
-    }, 5000); // 3000 milliseconds = 3 seconds
+    }, 1000); // 3000 milliseconds = 3 seconds
   }
 }
 
 function pageOne(){
   page1.style.display = 'block';
   page2.style.display = 'none';
-  page3.style.display = 'none';
   pageButton1[0].style.background = 'rgb(172, 134, 134)'
   pageButton2[0].style.background = 'rgb(43, 40, 40)';
-  pageButton3[0].style.background = 'rgb(43, 40, 40)';
 }
 
 function pageTwo(){
   page1.style.display = 'none';
   page2.style.display = 'block';
-  page3.style.display = 'none';
   pageButton1[0].style.background = 'rgb(43, 40, 40)';
   pageButton2[0].style.background = 'rgb(172, 134, 134)';
-  pageButton3[0].style.background = 'rgb(43, 40, 40)';
 }
 
 function pageThree(){
   page1.style.display = 'none';
   page2.style.display = 'none';
-  page3.style.display = 'block';
   pageButton1[0].style.background = 'rgb(43, 40, 40)';
   pageButton2[0].style.background = 'rgb(43, 40, 40)';
-  pageButton3[0].style.background = 'rgb(172, 134, 134)';
 }
 
 
@@ -323,42 +413,51 @@ const valueGenerator = (angleValue) =>{
 //Spinner Count
 
 let count = 0;
-//100 rotations for animation and last rotation for result
-let resultValue = 101;
+let resultValue = 21;
 // Start spinning wheel
 spinButton.addEventListener("click", () =>{
+  rotationValues = [];
+  for(let i = 0; i < numOfElements; i++){
+    rotationValues[i]=({minDegree: (360/numOfElements)*(i)+1, maxDegree: (360/numOfElements)*(i+1), value: chartData.labels[numOfElements-1-i]});
+  };
+
   myAudio.play();
-  // const muteVolume = document.getElementById('mute-icon');
-  // if(muteVolume.style.display == 'block'){
-  //   myAudio.muted = true;
-  // }
   spinButton.disabled = true;
   finalValue.innerHTML = '<p>Good Luck!</p>';
-  
 
   //Generate random degree to stop at - between 0 to 360
   // const min = 1;
   // const max = 10;
   // const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-
-
   let randomDegree = Math.floor(Math.random()*361);
   // Interval for rotation animation
   let rotationInterval = window.setInterval(() =>{
+    if (resultValue === 7){
+      console.log("The wheel is stopping soon");
+      myAudio.pause();
+      myAudio.currentTime = 0;
+      myAudioEnding.play();
+    }
     myChart.options.rotation = myChart.options.rotation + resultValue;
     myChart.update();
+    console.log('Result value is ' + resultValue)
+    console.log('Random degree is ' + randomDegree)
+    console.log('Chart rotation value is ' + myChart.options.rotation)
     //If the rotation > 360, reset it back to 0
     if(myChart.options.rotation >= 360){
       count += 1;
-      resultValue -= 5;
+      resultValue -= 2;
       myChart.options.rotation = 0;
-    } else if (count > 15 && myChart.options.rotation == randomDegree){
+    } else if (count > 9 && myChart.options.rotation == randomDegree){
       valueGenerator(randomDegree);
       clearInterval(rotationInterval);
       count = 0;
-      resultValue = 101;
+      resultValue = 21;
+      console.log("The wheel stops now")
+      myAudioEnding.pause();
+      myAudioEnding.currentTime = 0;
+      popupOpen();
     }
-    
   }, 10);
-  popupOpen();
+  
 });

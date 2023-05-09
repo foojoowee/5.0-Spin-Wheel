@@ -12,6 +12,7 @@
     <body>
         <div id="master-audio">
             <audio id="audio1" src="/Assets/Background/wheel-spin.mp3"></audio>
+            <audio id="audio2" src="/Assets/Background/wheel-spin-ending.mp3"></audio>
         </div>
         <!-- <style contenteditable style="display:block">
             body{
@@ -32,7 +33,7 @@
                 <button type="submit" class="btn" onclick="popupClose()">
                     Close
                 </button>
-                <button type="submit" class="btn">
+                <button type="submit" class="btn" onclick="removeItem()">
                     Remove
                 </button>
 
@@ -44,9 +45,9 @@
                 <button id="settings-btn" onclick="showSettings()"> Settings <img class="settings-icon" src="/Assets/Background/settings.svg"> </button>
                 <div class="sub-wrapper">
                     <div id="wheel-description1">
-                        <h2 contenteditable="">Wheel Segments #1</h2>
+                        <h2 contenteditable="">Wheel Segments Input</h2>
                             <!-- <img src="Assets/Background/mountains.jfif" id="testing3"> -->
-                            <div id="wheel-segments-table" contenteditable>
+                            <div type="input" id="wheel-segments-table" contenteditable spellcheck="false" oninput="wheelChange()" placeholder="No input">
                                 <p>Annie</p>
                                 <p>Blitzcrank</p>
                                 <p>Camille</p>
@@ -57,32 +58,18 @@
                             <div id="segment-count">
                                 <p>Number of segments is: 6</p>
                             </div>
+
+                            <!-- <button id="wheel-change-button" onclick="wheelChange()">
+                                Update Table
+                            </button> -->
                     </div>
                     <div id="wheel-description2">
                         <h2 contenteditable="">SPIN RESULTS</h2>
-                        <div id="spin-results">Recent spin results:</div>
+                        <div id="spin-results"></div>
                     </div>
-                    <div id="wheel-description3">
-                        <h2 contenteditable="">Wheel Segments #3</h2>
-                        <div id="wheel-field">
-                            <div id="wheel-segments">
-                                <form>
-                                    <div>
-                                        <label>Additional Segment</label>
-                                        <input type="text" id="add-field">
-                                    </div>
-                                    <div>
-                                        <label>Remove Segment</label>
-                                        <input type="text" id="add-field">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div> 
                     <div id="circles">
                         <button class="page-button-1" onclick="pageOne()"> &nbsp </button>
                         <button class="page-button-2" onclick="pageTwo()"> &nbsp </button>
-                        <button class="page-button-3" onclick="pageThree()"> &nbsp </button>
                     </div>
                     <div class="container1">
                         <!-- <canvas id="wheel"></canvas> -->
@@ -111,6 +98,19 @@
                         <button id="red-button" onclick="redTheme()"> Red </button>
                         <button id="blue-button" onclick="blueTheme()"> Blue </button>
                         <button id="yellow-button" onclick="yellowTheme()"> Yellow </button>
+                        <div id="wheel-colour-custom">
+                            Wheel Color 1:
+                            <input type="color" id="color-picker" value="#1565c0" oninput="colourPicker2()">
+                        </div>
+                        <div id="wheel-colour-custom">
+                            Wheel Color 2:
+                            <input type="color" id="color-picker2" value="#ADD8E6" oninput="colourPicker2()">
+                        </div>
+                        <div id="page-colour-custom">
+                            Page Colour:
+                            <input type="color" id="colour-picker" value="#AC8686" oninput="colourPicker()">
+                        </div>
+
                     </div>
                 </div>
 
@@ -128,10 +128,6 @@
                         <p><label for="input-theme">Custom theme</label></p>
                     </form>
                     <!-- <button> Upload Theme </button> -->
-                </div>
-
-                <div id="wheel-speed">
-                    <p> Spin Wheel Speed: </p>
                 </div>
 
                 <div id="music-settings">

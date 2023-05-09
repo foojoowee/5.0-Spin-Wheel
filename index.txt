@@ -1,0 +1,162 @@
+Challenges faced when building the spin-wheel.
+
+1. Calling innerHTML to be live - to be interactive with user input. "pElements" has to be defined outside as let, and modified in the function. This is used in conjuction with onchange = "function()"
+
+Snippet of the code below:
+
+let pElements = wheelSegment.querySelectorAll("p");
+let numOfElements = pElements.length;
+
+function wheelChange(){
+pElements = wheelSegment.querySelectorAll("p");
+numOfElements = pElements.length;
+...
+}
+
+Also, for the live interaction to occur, we have to keep checking if the data.length and numOfElements (which is checking the number of p tags in the division and updating) match. 
+
+When we add a p tag in the contenteditable table, data.length should be less than the numOfElements elements, as it has not been updated. Here "16" is just a blank arbitrary number used - this represents the size of the pieChart segment in ChartJS. We first push a segment into the ChartJS, and the labels have not been updated.
+
+  if (data.length < numOfElements){
+    for(let i = data.length+1; i <= numOfElements; i++){
+        data.push(16);
+    };
+  };
+
+To complement the above, we have to iterate over all the items in the chart, and make sure it matches the pElements. I chose to reiterate this and no just adding or removing 1 element as chunks of copy pasted data could be dumped into the table, which might cause some bugs. This might compromise the runtime of the programe if the data chunk is quite big.  However, looking at the scale of this wheel, it is unlikely we will be adding too many segments to a spin-wheel as it will reduce the user experience when the text gets exceedingly small.
+
+for(let i = 0; i < numOfElements; i++){
+    chartData.labels[i] = pElements[i].textContent;
+  }
+
+We will do the opposite when we remove an item from the chart. Again, this will make the data.length match the numOfElements. Here there is an additional label removal, as we are assuming the label already exists.
+
+  if (data.length > numOfElements){
+    for(let i = data.length; i > numOfElements; i--){
+      data.pop();
+      chartData.labels.splice(i-1,1);
+    }
+  };
+
+
+
+  myChart.update();
+
+  It is important to include myChart.update() inside the 
+
+
+
+2. Inserting audio and wheel sounds. This is the first project i have tried to insert audio. Sometimes the audio plays and stop as wanted to. Also took some time to figure out how to mute audio while wheel is spinning (better used experience in case they want to mute).
+
+Snippet of the code below:
+
+  try{
+    const customMusic = document.getElementById("custom-audio")
+    customMusic.muted = true;
+    customMusic.pause();
+    }
+    catch(err){
+      // console.log("No Custom Music")
+  };
+
+This is because, when no audio custom audio is inserted, the default spin audio cannot be muted, as the code breaks when attempting to mute the custom audio (included in the mute). Therefore, before muting, the code has to check if there is a custom audio file first.
+
+3. Also learned to make my own SVG file on FIGMA (used for certain icons in the wheel).
+
+This is more of a basic fundamentals - as this is my first project. Going to just leave this documentation here.
+
+4. Understanding the syntax of ChartJS and coming out with a way to rotate the wheel.
+
+Understanding that wheel rotates clockwise, hence the list should be reversed. When the wheel rotates anticlosewise, the first element displayed in a clockwise direction should be called first. Example:
+
+Snippet of a code for a wheel with 3 elements:
+
+rotationValues = [
+    {minDegree: 1 maxDegree: 120  value: Segment1}
+    {minDegree: 121 maxDegree: 240  value: Segment2}
+    {minDegree: 241 maxDegree: 360  value: Segment3}
+]  <-- This would work only if the wheel is spinning anticlockwise, and assuming the selector arrow is at 0 degree angle
+
+rotationValues = [
+    {minDegree: 241 maxDegree: 360  value: Segment1}
+    {minDegree: 121 maxDegree: 240  value: Segment2}
+    {minDegree: 1 maxDegree: 120  value: Segment3}
+]  <-- This would work only if the wheel is spinning clockwise
+
+Also, instead of manually reversing a list like what LeetCode would request of you, in JS you can simply just use .reverse(). For my case, not all the items have to be reverse, only the value key inside the list.
+
+  for(let i = 0; i < numOfElements; i++){
+    rotationValues[i]=({minDegree: (360/numOfElements)*(i)+1, maxDegree: (360/numOfElements)*(i+1), value: chartData.labels[numOfElements-1-i]});
+  };
+
+  value: chartData.labels[numOfElements-1-i] <-- this effectively reverses the list.
+
+
+5. Also for removing items:
+
+function removeItem(){
+  const string = popup.innerHTML;
+  const find = string.indexOf(":");
+  const newString = string.substring(find+1).trim();
+  const findString = newString.substring(0, newString.length-5)
+  console.log(findString);
+  for(let pElement of pElements){
+    if (findString === pElement.textContent){
+      console.log('found item');
+      pElement.remove();
+      wheelChange();
+      break;
+    }
+  }
+}
+
+A bug or mistake i did here was to use:
+
+if (findString === pElement) instead of if (findString === pElement.textContent).
+
+This is just a simple mistake that took me about 20minutes to figure out - forgive me, my brain sometimes just dies. This is just to document simple mistakes that could be done in the DOM, especially for beginners who are not too familiar.
+
+6. I also had some trouble setting up a range slider for the audio volume in my file. In hindsight it was a really simple process:
+
+HTML Code: 
+    <input type="range" id="volume-slider" min="0" max="100" step="1" oninput="SetVolume(this.value)" onchange="SetVolume(this.value)"></input>
+
+this.value simply calls the current value of the range slider, and then:
+
+JS Code:
+    function SetVolume(value){
+    const customMusic = document.getElementById("custom-audio");
+    customMusic.volume = value/100;
+  }
+
+We pass it onto this function with and onchange() prompt which will update the music volume as the user changes the volume.
+
+I tried running a code with something like volume-slider.volume which did not work in the function, which could be due to some variable scope issues, or some DOM loading issues as the volume slider is first hidden when the page is loaded. However, I found this method to be a much easier fix, using the "this.value" which is frequently found in constructor functions.
+
+7. Last but not least, i had a problem syncing the audio spinning wheel to how long it took the wheel to spin. The way the wheel works is we first assign an arbitrary number between 1 ot 360, and the rotation of the wheel will be increased by this number each time.
+
+The first code we set for the rotation is:
+
+if(myChart.options.rotation >= 360){
+      count += 1;
+      resultValue -= 2;
+      myChart.options.rotation = 0;
+}
+
+This means, each time a full rotation is done, the count will be increased. And the resultValue will decrease. The decrease in result value means that the wheel will spin slower, at a rate of -2 (10% slower from its original 21 value).    
+
+myChart.options.rotation = 0;
+
+Note that this line of the code only takes into affect when the rotation value is above 360. We reset it to zero to make sure the randomDegree number does not get passed even if a low generated number is a result of the random function.
+
+This function is carried out using window.setInterval((function... ), 10) at an interval of 10 milliseconds, or 0.01 seconds. This means it takes around 360/21 * 0.01 seconds for the wheel to rotate once.
+
+We then set the condition to (count > 9 && myChart.options.rotation == randomDegree);
+To explain this part of the code. We have a randomly generated number between 1 to 360. This is the number where we stop our wheel rotation at. We only start checking if the rotation value matches after 9 full rotations - to let the wheel spin a little longer. Once these 2 conditions are fulfilled, there is a clearInterval(rotationInterval) which allows us to stop the function from persisting.
+
+There are two audio files, one with a faster speed, and one with a slower speed. As the value of "resultValue" approaches 1, this signifies that the wheel is about to stop. Once the result value reaches 1, the wheel will slow much down, increasing only 1 degree of rotation every 0.01 second, or 100 degrees per second upon stopping (this is also when the slowed down wheel spinning sound starts playing)
+
+Hence, the audio is switched to the slower version. I have tried to use the Web Audio API to slow down the audio, but the audio seems distorted, so i decided on using two audio files instead.
+
+An improvement would be to have fadeOut() audio function using the Web Audio API to make the sound of the spinning not stop so abruptly.
+
