@@ -2,9 +2,9 @@ const wheel = document.getElementById("wheel");
 const spinButton = document.getElementById("spin-button");
 const finalValue = document.getElementById("final-value");
 const wheelArrow = document.getElementById("wheel-arrow");
-const myAudio = new Audio('/Assets/Background/wheel-spin.mp3');
-const myAudioEnding = new Audio('/Assets/Background/wheel-spin-ending.mp3');
-const winAudio = new Audio('/Assets/Background/win.mp3');
+const myAudio = new Audio('./Assets/Background/wheel-spin.mp3');
+const myAudioEnding = new Audio('./Assets/Background/wheel-spin-ending.mp3');
+const winAudio = new Audio('./Assets/Background/win.mp3');
 const muteIcon = document.getElementById("mute-icon");
 const page1 = document.getElementById("wheel-description1");
 const page2 = document.getElementById("wheel-description2");
@@ -233,15 +233,15 @@ const inputFile = document.getElementById('input-theme');
 let uploadedImage = "";
 
 function firstTheme(){
-  bgTheme[0].style.background = 'url("Assets/Background/theme-1.jpg")'
+  bgTheme[0].style.background = 'url("./Assets/Background/theme-1.jpg")'
 }
 
 function secondTheme(){
-  bgTheme[0].style.background = 'url("Assets/Background/theme-2.jpg")'
+  bgTheme[0].style.background = 'url("./Assets/Background/theme-2.jpg")'
 }
 
 function thirdTheme(){
-  bgTheme[0].style.background = 'url("Assets/Background/theme-3.jpg")'
+  bgTheme[0].style.background = 'url("./Assets/Background/theme-3.jpg")'
 }
 
 inputFile.onchange = function (){
@@ -440,9 +440,9 @@ spinButton.addEventListener("click", () =>{
     }
     myChart.options.rotation = myChart.options.rotation + resultValue;
     myChart.update();
-    console.log('Result value is ' + resultValue)
-    console.log('Random degree is ' + randomDegree)
-    console.log('Chart rotation value is ' + myChart.options.rotation)
+    // console.log('Result value is ' + resultValue)
+    // console.log('Random degree is ' + randomDegree)
+    // console.log('Chart rotation value is ' + myChart.options.rotation)
     //If the rotation > 360, reset it back to 0
     if(myChart.options.rotation >= 360){
       count += 1;
@@ -453,7 +453,7 @@ spinButton.addEventListener("click", () =>{
       clearInterval(rotationInterval);
       count = 0;
       resultValue = 21;
-      console.log("The wheel stops now")
+      // console.log("The wheel stops now")
       myAudioEnding.pause();
       myAudioEnding.currentTime = 0;
       popupOpen();
