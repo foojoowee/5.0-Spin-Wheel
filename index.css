@@ -8,6 +8,7 @@
 
 body{
     background: linear-gradient(300deg, rgb(185, 185, 192), rgb(37, 74, 131));
+
 }
 
 
@@ -27,60 +28,85 @@ button:hover{
     justify-content: center;
     height: 100vh;
     width: 100vw;
+
 }
 
 .wrapper{
-    /* max-width: 850px;
-    max-height: 535px; */
     position: relative;
-    /* margin: 0 auto; */
     box-shadow: 0px 0px 10px 5px black;
     padding: 20px;
-    /* background-color: aqua; */
     background: url("Assets/Background/theme-1.jpg");
     background-size: cover !important;
     background-position: center !important;
-
+    width: 1000px;
+    height: 600px;
 }
 
 #wheel-description1{
-    width: 800px;
+    position: relative;
+    min-width: 400px;
     word-wrap: break-word;
     max-height: 1000px;
     box-shadow: 0px 0px 10px 5px black;
     padding: 20px;
     margin: 20px;
-    background: rgb(172, 134, 134);
+    background: rgb(236, 207, 207);
 }
 
-#wheel-description2{
-    width: 800px;
-    word-wrap: break-word;
-    max-height: 1000px;
-    box-shadow: 0px 0px 10px 5px black;
-    padding: 20px;
-    margin: 20px;
-    background: rgb(172, 134, 134);
-    display: none;
-}
-
-#wheel-description3{
-    width: 800px;
-    word-wrap: break-word;
-    max-height: 1000px;
-    box-shadow: 0px 0px 10px 5px black;
-    padding: 20px;
-    margin: 20px;
-    background: rgb(172, 134, 134);
-    display: none;
-}
-
-
-.wheel-description1 h2{
+#wheel-description1 h2{
+    margin-bottom: 10px;
     overflow-wrap: break-word;
 }
 
-.page-button-2, .page-button-3{
+#wheel-segments-table{
+    background: white;
+    border: 2px solid rgb(121, 101, 101);
+    border-radius: 10px;
+    max-height: 250px;
+    padding: 10px;
+    overflow: auto;
+    overflow-wrap: break-word;
+    margin-bottom: 20px;
+}
+
+#wheel-segments-table:focus{
+    background:rgb(223, 238, 248);
+}
+
+#segment-count{
+    background: rgb(223, 223, 255);
+    position: absolute;
+    bottom: 5%;
+    font-size: 0.9rem;
+    padding: 2px 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+#wheel-description2{
+    display: none;
+    position: relative;
+    width: 50%;
+    max-width: 1200px;
+    min-width: 400px;
+    word-wrap: break-word;
+    max-height: 1000px;
+    box-shadow: 0px 0px 10px 5px black;
+    padding: 20px;
+    margin: 20px;
+    background: rgb(236, 207, 207);
+}
+
+#spin-results{
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 80%
+}
+
+.page-button-2{
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -98,42 +124,47 @@ button:hover{
     background:rgb(173, 149, 149);
 }
 
+/* important */
 .sub-wrapper{
     display:flex;
-    width: 800px;
-    margin-right: 20px;
+    width: 80%;
+    height: 80%;
 }
 
 .container1{
+    width: 400px; 
+    height: 400px;
+    margin-left: 25px;
+    display: flex;
     position: relative;
-    width: 100%;
-    height: 100%;
 }
 
-#wheel{
+#wheel {
     display: block;
-    height: 425px !important;
-    width: 425px !important;
     top: 0;
     padding: 20px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
 
 #spin-button{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 20%;
-    width: 25%;
+    padding: 10px 10px;
     border-radius: 50%;
     cursor: pointer;
     border: none;
-
-    font-size: 1.2em;
+    font-size: 1.0em;
     letter-spacing: 0.1em;
     font-weight: 500;
     text-transform: uppercase;
     background: radial-gradient(rgb(255, 251, 0) 20%, rgb(133, 133, 187));
+    z-index: 5;
     /* opacity: 0;  */
 }
 
@@ -142,12 +173,18 @@ button:hover{
 }
 
 #wheel-arrow{
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+#wheel-border{
     /* opacity: 0; */
     position: absolute;
-    width: 4em;
-    top: 0%;
-    right: 42%;
-    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #final-value{
@@ -168,10 +205,13 @@ button:hover{
 .wheel-settings{
     padding: 30px;
     border: 3px solid black;
+    border-radius: 10px;;
     background:rgb(231, 231, 213);
     display: none;
-
-    /* transition: 2s ease-in; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
 }
 
 .wheel-settings h2{
@@ -252,6 +292,25 @@ button:hover{
     background-position: center !important;
 }
 
+#music-icons{
+    position: absolute;
+    right: 14%;
+    z-index: 5;
+}
+
+#music-icons img{
+    height: 1.5em;
+    background: white;
+    padding: 4px;
+    border: 1px solid rgb(8, 8, 8);
+    border-radius: 5px;;
+    cursor: pointer;
+}
+
+#mute-icon{
+    display: none;
+}
+
 .settings-icon{
     height: 1em;
     vertical-align: -2px;
@@ -260,13 +319,13 @@ button:hover{
 
 #settings-btn{
     position: absolute;
-    right: 10%;
+    right: 3%;
     z-index: 1;
     border-radius: 10px;
     padding: 0 5px;
     color: black;
     background: rgb(159, 216, 255);
-
+    transition: 0.4s;
 }
 
 #settings-btn:hover{
@@ -278,13 +337,14 @@ button:hover{
 #hide-settings{
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
     padding: 0 10px;
     border-radius: 10px;
     color: black;
     background: rgb(159, 216, 255);
+    transition: 0.4s;
 }
 
 #hide-settings img{
@@ -295,23 +355,6 @@ button:hover{
 #hide-settings:hover{
     color: white;
     background: rgb(93, 93, 143);
-}
-
-#music-icons{
-    position: relative;
-    float: left;
-}
-
-#music-icons img{
-    height: 1.5em;
-    background: white;
-    padding: 2px;
-    border: 1px solid rgb(8, 8, 8);
-    cursor: pointer;
-}
-
-#mute-icon{
-    display: none;
 }
 
 #popup-box{
@@ -345,7 +388,7 @@ button:hover{
     text-align: center;
     border-radius: 10px;
     padding: 0px 80px;
-    animation: popUp 2.0s;
+    animation: fadeIn 2.0s;
     display: none;
     z-index: 10;
 }
@@ -424,6 +467,7 @@ button:hover{
     padding: 0px 8px;
     margin-top: 3px;
     cursor:pointer;
+    transition: 0.4s;
 }
 
 #upload-theme p:hover{
@@ -481,39 +525,20 @@ button:hover{
     padding: 0px 8px;
     margin-top: 3px;
     cursor:pointer;
+    transition: 0.4s;
 }
 
 #upload-music input{
     display: none;
 }
 
+#upload-music label:hover{
+    color: white;
+    background: rgb(93, 93, 143);
+}
+
 #wheel-field{
     position: relative;
-}
-
-#wheel-segments-table{
-    background: white;
-    border: 2px solid rgb(121, 101, 101);
-    border-radius: 10px;
-    max-height: 250px;
-    padding: 10px;
-    /* overflow-y: scroll; */
-    overflow: auto;
-    overflow-wrap: break-word;
-    /* white-space: pre-wrap; */
-}
-
-#wheel-segments-table:focus{
-    background:rgb(223, 238, 248);
-}
-
-#segment-count{
-    text-align: center;
-    background: rgb(202, 185, 185);
-    padding: 0px;
-    margin: 3px;
-    font-weight: 500;
-    border-radius: 10px;
 }
 
 #wheel-change-button{
@@ -558,30 +583,27 @@ button:hover{
     }
 }
 
-@media screen and (max-width: 768px){
-    .wrapper{
-        font-size: 10px;
-    }
-    #wheel{
-        display: block;
-        height: 200px;
-        width: 200px;
-        top: 0;
-        padding: 10px;
-    }
-}
-
 .pop-up{
     opacity: 1;
     transition: all 0.5s ease in;
 }
 
-@keyframes popUp{
+@keyframes fadeIn{
     from {
         opacity: 0;
       }
       to {
         opacity: 1;
+
+      }
+}
+
+@keyframes fadeOut{
+    from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
 
       }
 }
@@ -607,5 +629,97 @@ button:hover{
         transform: translateX(-20%);
         opacity: 0;
 
+    }
+}
+
+@media (max-width: 1200px){
+    #wheel-description1{
+        min-width: 300px;
+    }
+    .wrapper{
+        width: 900px;
+        height: 600px;
+    }
+
+}
+
+@media (max-width: 600px){
+    .main-wrapper{
+        height: 100%;
+        margin-top: 50px
+    }
+    .container1{
+        margin-top: 30px;
+    }
+    .sub-wrapper{
+        flex-direction: column;
+        margin: 0px;
+    }
+    .wrapper{
+        width: 300px;
+        height: 500px;
+    }
+    .sub-wrapper{
+        width: 100%;
+        align-items: center;
+
+    }
+    #wheel-description1{
+        min-width: 150px;
+        max-width: 300px;
+        min-height: 310px;
+    }
+    #wheel-description1 h2{
+        font-size: 1.0rem;
+    }
+
+    #wheel-segments-table{
+        font-size: 0.8rem;
+        max-height: 200px;
+    }
+
+    #segment-count{
+        font-size: 0.7rem;
+        bottom: 1%;
+        left: 20%
+    }
+    #settings-btn{
+        position: absolute;
+        top: 80%;
+        right: 30%
+    }
+
+    #music-icons{
+        position: absolute;
+        top: 80%;
+        left: 30%;
+    }
+    #wheel {
+        display: block;
+        padding: 20px;
+        position: relative;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #spin-button{
+        top: 80%;
+        left: 50%;
+    }
+    #wheel-arrow{
+        top: 30%;
+    }
+    #circles{
+        position: absolute;
+        top: 73%;
+        left: 43%;
+    }
+    #final-value{
+        display: none;
+    }
+    #popup-box{
+        top: 115%;
+        left: 0%;
+        margin-bottom: 20px;
     }
 }

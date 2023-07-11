@@ -110,7 +110,7 @@ let pieColors = [
 //using a pie chart for wheel
 
 const chartData = {
-  labels: ["Annie","Blitzcrank","Camille","Draven","Elise","Fiora"],
+  labels: ["Player 1", "Player 2", "Player 3", "Player 4", "Player 5"," Player 6"],
   datasets: [
     {
       backgroundColor: pieColors,
@@ -138,7 +138,7 @@ const chartConfig = {
         datalabels: {
           color: "#ffffff",
           formatter: (_, context) => context.chart.data.labels[context.dataIndex],
-          font: { size: 24},
+          font: {size: 20},
         },
       },
     },
@@ -291,7 +291,7 @@ function SetVolume(value){
 function showSettings(){
   const settings = document.getElementsByClassName('wheel-settings');
   settings[0].style.display = 'block';
-  settings[0].style.animation = 'slide-in 0.25s ease-in';
+  settings[0].style.animation = 'fadeIn 0.25s ease-in';
   // settings[0].classList.add('fadeIn');
   const button = document.getElementById('settings-btn');
   button.style.display = 'none';
@@ -299,7 +299,7 @@ function showSettings(){
 
 function hideSettings(){
   const settings = document.getElementsByClassName('wheel-settings');
-  settings[0].style.animation = 'slide-out 0.25s ease-in';
+  settings[0].style.animation = 'fadeOut 0.25s ease-in';
   setTimeout(function() {
     const settings = document.getElementsByClassName('wheel-settings');
     settings[0].style.display = 'none';
@@ -313,11 +313,10 @@ function hideSettings(){
 
 
 function mute(){
+  console.log("Mute")
   const muteVolume = document.getElementById('mute-icon');
-  // muteVolume.style.zIndex = '-10';
   muteVolume.style.display = 'block';
   const unmuteVolume = document.getElementById('unmute-icon');
-  // muteVolume.style.zIndex = '-10';
   unmuteVolume.style.display = 'none';
   myAudio.muted = true;
   myAudioEnding.muted = true;
@@ -334,10 +333,8 @@ function mute(){
 
 function unmute(){
   const muteVolume = document.getElementById('mute-icon');
-  // muteVolume.style.zIndex = '-10';
   muteVolume.style.display = 'none';
   const unmuteVolume = document.getElementById('unmute-icon');
-  // muteVolume.style.zIndex = '-10';
   unmuteVolume.style.display = 'block';
   myAudio.muted = false;
   myAudioEnding.muted = false;
@@ -367,7 +364,7 @@ function popupOpen(){
       const mainWrapper = document.getElementsByClassName("main-wrapper");
       mainWrapper[0].style.opacity = "0.3";
       winAudio.play();
-    }, 1000); // 3000 milliseconds = 3 seconds
+    }, 500); // 3000 milliseconds = 3 seconds
   }
 }
 
@@ -414,13 +411,36 @@ const valueGenerator = (angleValue) =>{
 
 let count = 0;
 let resultValue = 21;
+
+//Default spinning:
+let spinVar;
+
+window.addEventListener('load', function() {
+  // Function to run on screen load
+  contSpin();
+});
+
+function autoSpin(){
+  myChart.options.rotation = myChart.options.rotation + 0.25;
+  myChart.update();
+}
+
+function contSpin(){
+  spinVar = setInterval(autoSpin, 10);
+}
+
+function stopSpinning() {
+  // Clear the spinning interval
+  clearInterval(spinVar);
+}
+
 // Start spinning wheel
 spinButton.addEventListener("click", () =>{
   rotationValues = [];
   for(let i = 0; i < numOfElements; i++){
     rotationValues[i]=({minDegree: (360/numOfElements)*(i)+1, maxDegree: (360/numOfElements)*(i+1), value: chartData.labels[numOfElements-1-i]});
   };
-
+  stopSpinning();
   myAudio.play();
   spinButton.disabled = true;
   finalValue.innerHTML = '<p>Good Luck!</p>';

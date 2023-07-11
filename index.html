@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Spin Wheel</title>
+        <link rel="icon" type="image/svg+xml" href="./Assets/wheel-icon.jfif" />
         <link rel="stylesheet" href="index.css">
         <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed&family=Karla&family=Poor+Story&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
@@ -14,11 +15,6 @@
             <audio id="audio1" src="./Assets/Background/wheel-spin.mp3"></audio>
             <audio id="audio2" src="./Assets/Background/wheel-spin-ending.mp3"></audio>
         </div>
-        <!-- <style contenteditable style="display:block">
-            body{
-                background: linear-gradient(300deg, rgb(185, 185, 192), rgb(37, 74, 131));
-        }
-        </style> -->
         <div id="winner-popup">
             <div id="popup-container" class="pop-up">
                 <div id="popup-title">
@@ -42,37 +38,39 @@
 
         <div class="main-wrapper">
             <div class="wrapper">
-                <button id="settings-btn" onclick="showSettings()"> Settings <img class="settings-icon" src="./Assets/Background/settings.svg"> </button>
+                <button id="settings-btn" onclick="showSettings()"> 
+                    Settings 
+                    <img class="settings-icon" src="./Assets/Background/settings.svg"> 
+                </button>
+                <div id="music-icons">
+                    <img id="mute-icon" src="./Assets/Background/mute.svg" onclick="unmute()">
+                    <img id="unmute-icon" src="./Assets/Background/unmute.svg" onclick="mute()">
+                </div>
                 <div class="sub-wrapper">
                     <div id="wheel-description1">
-                        <h2 contenteditable="">Wheel Segments Input</h2>
-                            <!-- <img src="Assets/Background/mountains.jfif" id="testing3"> -->
-                            <div type="input" id="wheel-segments-table" contenteditable spellcheck="false" oninput="wheelChange()" placeholder="No input">
-                                <p>Annie</p>
-                                <p>Blitzcrank</p>
-                                <p>Camille</p>
-                                <p>Draven</p>
-                                <p>Elise</p>
-                                <p>Fiora</p>
-                            </div>
-                            <div id="segment-count">
-                                <p>Number of segments is: 6</p>
-                            </div>
-
-                            <!-- <button id="wheel-change-button" onclick="wheelChange()">
-                                Update Table
-                            </button> -->
+                        <h2 contenteditable>WHEEL INPUT/ EVENT TITLE</h2>
+                        <div type="input" id="wheel-segments-table" contenteditable spellcheck="false" oninput="wheelChange()" placeholder="No input">
+                            <p>Player 1</p>
+                            <p>Player 2</p>
+                            <p>Player 3</p>
+                            <p>Player 4</p>
+                            <p>Player 5</p>
+                            <p>Player 6</p>
+                        </div>
+                        <div id="segment-count">
+                            <p>Wheel segments: 6</p>
+                        </div>
                     </div>
                     <div id="wheel-description2">
-                        <h2 contenteditable="">SPIN RESULTS</h2>
-                        <div id="spin-results"></div>
+                        <h2 contenteditable="">SPIN HISTORY</h2>
+                        <div id="spin-results">
+                        </div>
                     </div>
                     <div id="circles">
                         <button class="page-button-1" onclick="pageOne()"> &nbsp </button>
                         <button class="page-button-2" onclick="pageTwo()"> &nbsp </button>
                     </div>
                     <div class="container1">
-                        <!-- <canvas id="wheel"></canvas> -->
                         <canvas id="wheel" ></canvas>
                         <button id="spin-button">Spin</button>
                         <img id="wheel-arrow" src="./Assets/wheel-arrow.svg" alt="">
@@ -81,16 +79,13 @@
                 <div id="final-value">
                     <p>Click Spin</p>
                 </div>
-                <div id="music-icons">
-                    <img id="mute-icon" src="./Assets/Background/mute.svg" onclick="unmute()">
-                    <img id="unmute-icon" src="./Assets/Background/unmute.svg" onclick="mute()">
-                </div>
                 <div id="popup-box">
                     <input type="checkbox" id="popup-checkbox" name="popup" checked>
                     <label for="popup">Pop-up Message for Winner</label>
                 </div>
             </div>
             <div class="wheel-settings">
+                <button id="hide-settings" onclick="hideSettings()">Hide Settings<img src="./Assets/Background/settings.svg" style="height:1em"></button>
                 <h2>Wheel Settings</h2>
                 <div class="wheel-colour">
                     <div> 
@@ -110,7 +105,6 @@
                             Page Colour:
                             <input type="color" id="colour-picker" value="#AC8686" oninput="colourPicker()">
                         </div>
-
                     </div>
                 </div>
 
@@ -146,8 +140,6 @@
                         </div>
                     </div>
                 </div>
-
-                <button id="hide-settings" onclick="hideSettings()">Hide Settings<img src="./Assets/Background/settings.svg" style="height:1em"></button>
             </div>
         </div>  
         
