@@ -664,12 +664,12 @@ button:hover{
         align-items: center;
 
     }
-    #wheel-description1{
-        min-width: 150px;
+    #wheel-description1, #wheel-description2{
+        min-width: 200px;
         max-width: 300px;
         min-height: 310px;
     }
-    #wheel-description1 h2{
+    #wheel-description1 h2, #wheel-description2 h2{
         font-size: 1.0rem;
     }
 
@@ -686,13 +686,14 @@ button:hover{
     #settings-btn{
         position: absolute;
         top: 80%;
-        right: 30%
+        right: 35%;
+        z-index: 100;
     }
-
     #music-icons{
         position: absolute;
         top: 80%;
         left: 30%;
+        display: none;
     }
     #wheel {
         display: block;
