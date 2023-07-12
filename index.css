@@ -723,4 +723,10 @@ button:hover{
         left: 0%;
         margin-bottom: 20px;
     }
+    .wheel-settings{
+        scale: 0.8
+    }
+    #popup-container{
+        margin-top: 400px;
+    }
 }
